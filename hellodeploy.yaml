@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: q4ans
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: q4ans
+  template:
+    metadata:
+      labels:
+        app: q4ans
+    spec:
+      containers:
+        - name: q4ans
+          image: gcr.io/google-samples/hello-app:1.0
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: q4ans
+spec:
+  selector:
+    app: q4ans
+  ports:
+    - port: 80
+      targetPort: 8080
